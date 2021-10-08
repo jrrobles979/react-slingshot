@@ -4,8 +4,8 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:  
-  # Build the project 
+jobs:
+  # Build the project
   build:
     docker:
       - image: circleci/node:13.8.0
@@ -23,7 +23,6 @@ jobs:
       - run: npm i
       - run: npm run test
 
-
   # Analyze the project
   analyze:
     docker:
@@ -32,17 +31,15 @@ jobs:
       - checkout
       - run: npm audit
 
-
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  my-workflow:
     jobs:
       - build
       - test:
-        requires:
-              - build
+          requires:
+            - build
       - analyze:
-        requires:
+          requires:
             - test
-  
